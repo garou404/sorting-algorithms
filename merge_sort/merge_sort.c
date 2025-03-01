@@ -15,23 +15,25 @@ int* merge_sort(int*tab, int size){
             *(snd_half+(i-half_size)) = *(tab+i);
         }
     }
-    fst_half = merge_sort(fst_half, half_size);
-    snd_half = merge_sort(snd_half, size-half_size);
+    int* sorted_fst_half = merge_sort(fst_half, half_size);
+    int* sorted_snd_half = merge_sort(snd_half, size-half_size);
+    free(fst_half);
+    free(snd_half);
 
     int i = 0, j = 0, k = 0;
     int* sorted = malloc(sizeof(int)*size);
     while(i < half_size || j < (size-half_size)){
-        if(((*(fst_half+i) < *(snd_half+j)) && (i != half_size)) || (j == size-half_size)){
-            *(sorted+k) = *(fst_half+i);
+        if(((*(sorted_fst_half+i) < *(sorted_snd_half+j)) && (i != half_size)) || (j == size-half_size)){
+            *(sorted+k) = *(sorted_fst_half+i);
             i++;
         }else {
-            *(sorted+k) = *(snd_half+j);
+            *(sorted+k) = *(sorted_snd_half+j);
             j++;
         }
         k++;
     }
-    free(fst_half);
-    free(snd_half);
+    free(sorted_fst_half);
+    free(sorted_snd_half);
     return sorted;
 }
 
@@ -49,11 +51,13 @@ void printf_array(int*tab, int size) {
 }
 
 int main(int argc, char** argv) {
-    int test_array[] = {8, 4, 9, 3, 1, 7, 6, 2, 5, 0};
-    int size = 10;
+    // int test_array[] = {8, 4, 9, 3, 1, 7, 6, 2, 5, 0};
+    // int size = 10;
+
+    int test_array[] = {3, 4, 1, 2};
+    int size = 4;
     printf_array(test_array, size);
 
-    // int*sorted_array = malloc(sizeof(int)*size);
     int*sorted_array = merge_sort(test_array, size);
     printf_array(sorted_array, size);
     free(sorted_array);
