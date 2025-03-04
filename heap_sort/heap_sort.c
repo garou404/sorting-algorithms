@@ -1,10 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-// int* heap_sort(int*tab, int size){
-//     int* heap = build_the_heap(tab, size);
-// }
-
+#include "heap_sort.h"
 
 
 int two_power(int x) {
@@ -41,28 +37,20 @@ void print_heap(int* heap, int heap_size) {
 
 void max_heapify(int* heap, int heap_size, int index){
     if(index >= heap_size) { return; }
-    // printf("\nMAX-HEAPIFY\n");
     int left = index*2+1;
     int right = index*2+2;
     int largest = index;
 
     if(left <= heap_size && heap[left] > heap[largest]) {
         largest = left; 
-        // printf("largest = left %d\n", left);
     }
     if(right <= heap_size && heap[right] > heap[largest]) {
         largest = right; 
-        // printf("largest = right %d\n", right);
     }
     if(largest != index) {
-        //swap heap[index] & heap[largest]
-        // printf("swap heap[index=%d] %d and heap[largest=%d] %d \n", index, heap[index], largest, heap[largest]);
         int temp = heap[index];
         heap[index] = heap[largest];
         heap[largest] = temp;
-        // printf("max_heapify(heap, heap_size, largest %d);\n", largest);
-        print_heap(heap, heap_size);
-        printf("\n\n");
         max_heapify(heap, heap_size, largest);
     }
     
@@ -70,25 +58,68 @@ void max_heapify(int* heap, int heap_size, int index){
 
 
 void build_the_heap(int*heap, int size){
-    // int* max_heap = malloc(sizeof(int)*size);
-    for (int i = size/2; i >= 0; i--)
-    {
-        printf("max heapify %i\n", i);
+    for (int i = size/2; i >= 0; i--) {
         max_heapify(heap, size, i);
     }
 }
 
+void swap(int* heap, int i1, int i2){
+    int temp = heap[i1];
+    heap[i1] = heap[i2];
+    heap[i2] = temp;
+}
 
+void heap_sort(int*heap, int size){
+    // phase 1
+    build_the_heap(heap, size);
+    // phase 2
+    for (int i = 1; i < size; i++){
+        swap(heap, 0, size-i);
+        sift_down(heap, size-i, 0);
+    }
+}
+
+int i_left_child(int i){
+    return 2*i+1;
+}
+
+int i_right_child(int i){
+    return 2*i+2;
+}
+
+void sift_down(int*heap, int size, int index){
+    while(i_left_child(index) < size){// while some element has children
+        // we should determine in the loop the index of the next children we will look at 
+        int nxt_index = i_left_child(index);
+        if(nxt_index+1 < size && heap[nxt_index+1] > heap[nxt_index]) {
+            nxt_index = nxt_index+1;
+        }
+        if (heap[index] < heap[nxt_index]){
+            //swap element of cur index and nxt_index
+            int temp = heap[index];
+            heap[index] = heap[nxt_index];
+            heap[nxt_index] = temp;
+            index = nxt_index;
+        }else {
+            return;
+        }
+    }
+}
+void print_array(int*tab, int size) {
+    printf("[");
+    for (int i = 0; i < size-1; i++){
+        printf("%d, ", tab[i]);
+    }
+    printf("%d]\n", tab[size-1]);
+    
+}
 
 int main(int argc, char** argv) {
 
-    // printf("%d\n", 1 == 1);
-    // printf("%d\n", 1/2);
-    // int heap[3] = {5, 7, 2};
-    // print_heap(heap, 3);
     int heap[12] = {5, 9, 2, 4, 10, 12, 6, 3, 1, 14, 7, 8};
     print_heap(heap, 12);
-    build_the_heap(heap, 12);
+    heap_sort(heap, 12);
     print_heap(heap, 12);
+    // print_array(heap, 12);
     return EXIT_SUCCESS;
 }
