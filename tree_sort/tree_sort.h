@@ -32,4 +32,12 @@ void free_tree(struct binary_search_tree* bst);
 /* free recursively the nodes from teh bst */
 void free_node(struct node*n);
 
+void print_node(struct node* node, int length, int additional_space);
+
+void print_space(int n, int additional_space);
+
+void print_tree(struct binary_search_tree* map);
+
+void build_sorted_array(struct node* node, int* arr, int* index);
+
 #endif

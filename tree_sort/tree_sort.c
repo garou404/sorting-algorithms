@@ -6,10 +6,22 @@ void tree_sort(int size_arr, int* arr) {
     // build tree
     struct binary_search_tree* bst = malloc(sizeof(struct binary_search_tree));
     
-    for (int i = 1; i < size_arr; i++) {
-        
+    for (int i = 0; i < size_arr; i++) {
+        insert_node(bst, *(arr+i));
     }
-    
+    print_tree(bst);
+
+    int index = 0;
+    build_sorted_array(bst->root, arr, &index);
+    printf_array(arr, size_arr);
+    free_tree(bst);
+}
+
+void build_sorted_array(struct node* node, int* arr, int* index) {
+    if(node->children[LEFT]) build_sorted_array(node->children[LEFT], arr, index);
+    arr[*index] = node->val;
+    (*index)++;
+    if(node->children[RIGHT]) build_sorted_array(node->children[RIGHT], arr, index);
 }
 
 
@@ -66,19 +78,52 @@ void free_node(struct node*n){
     free(n);
 }
 
-int main(int argc, char** argv) {
-    int test_array[] = {3, 4, 1, 2};
-    int size = 4;
+void print_tree(struct binary_search_tree* map) {
+    printf("BINARY SEARCH TREE:\n\n");
+    if(map->root) {
+        print_node(map->root, 0, 0);
+        printf("\n");
+    }
+}
 
-    struct binary_search_tree* bst = malloc(sizeof(struct binary_search_tree));
-    insert_node(bst, 5);
-    printf("insert 1\n");
-    insert_node(bst, 3);
-    printf("insert 2\n");
-    insert_node(bst, 7);
-    printf("insert 3\n");
-    printf("root %d left %d right %d\n", bst->root->val, bst->root->children[LEFT]->val, bst->root->children[RIGHT]->val);
-    // tree_sort(test_array, size);
-    free_tree(bst);
+void print_space(int n, int additional_space) {
+    for (int i = 0; i < 8*n+additional_space; i++) {
+        printf(" ");
+    }
+}
+
+void print_node(struct node* node, int length, int additional_space) {
+    if(node->children[LEFT] == NULL && node->children[RIGHT] == NULL) {
+        printf("%d", node->val);
+        printf("\n");
+    }
+    if(node->children[RIGHT]){
+        printf("%d r:", node->val);
+        if (node->val > 9){
+            print_node(node->children[RIGHT], length+1, additional_space+1);
+        }else{
+            print_node(node->children[RIGHT], length+1, additional_space);
+        }
+    }
+    if(node->children[LEFT]){
+        if(node->children[RIGHT]){
+            print_space(length, additional_space);
+        }
+        printf("%d l:", node->val);
+        if (node->val > 9){
+            print_node(node->children[LEFT], length+1, additional_space+1);
+        }else{
+            print_node(node->children[LEFT], length+1, additional_space);
+        }
+        return;
+    }
+}
+
+int main(int argc, char** argv) {
+    int test_array[] = {3, 8, 1, 2, 7, 4};
+    int size = 6;
+
+    tree_sort(size, test_array);
+    
     return EXIT_SUCCESS;
 }
