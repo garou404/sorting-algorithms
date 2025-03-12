@@ -23,21 +23,22 @@ void insert_node(struct binary_search_tree* bst, int val);
 /* create a new node for the tree */
 struct node* create_node(int val, struct node*parent);
 
-/* print the content of an array */
-void printf_array(int*tab, int size);
-
 /* free the struct binary_search_tree */
 void free_tree(struct binary_search_tree* bst);
 
 /* free recursively the nodes from teh bst */
 void free_node(struct node*n);
 
+/* print the nodes of the tree recursively */
 void print_node(struct node* node, int length, int additional_space);
 
-void print_space(int n, int additional_space);
+/* print space */
+void print_space_tree(int n, int additional_space);
 
+/* print the tree */
 void print_tree(struct binary_search_tree* map);
 
+/* build the sorted array using the binary search tree */
 void build_sorted_array(struct node* node, int* arr, int* index);
 
 #endif

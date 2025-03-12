@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "heap_sort.h"
-
+#include "../sort.h"
 
 int two_power(int x) {
     if (x == 0) {return 1;}
     else{return 2*two_power(x-1);}
 }
 
-void print_space(int x) {
+void print_space_heap(int x) {
     for (int i = 0; i < x; i++){
         printf(" ");
     }    
@@ -22,14 +22,14 @@ void print_heap(int* heap, int heap_size) {
         level_nb++;
     }
     for (int i = 0; i < level_nb+1; i++) {
-        print_space(two_power(level_nb-i));
+        print_space_heap(two_power(level_nb-i));
         for (int u = two_power(i)-1; u < two_power(i+1)-1; u++) {
             if(u == size){ 
                 printf("\n");
                 return;
             }
             printf("%d", heap[u]);
-            print_space(two_power(level_nb-i+1)-1);
+            print_space_heap(two_power(level_nb-i+1)-1);
         }
         printf("\n");
     }
@@ -105,14 +105,6 @@ void sift_down(int*heap, int size, int index){
         }
     }
 }
-void print_array(int*tab, int size) {
-    printf("[");
-    for (int i = 0; i < size-1; i++){
-        printf("%d, ", tab[i]);
-    }
-    printf("%d]\n", tab[size-1]);
-    
-}
 
 int main(int argc, char** argv) {
 
@@ -120,6 +112,6 @@ int main(int argc, char** argv) {
     print_heap(heap, 12);
     heap_sort(heap, 12);
     print_heap(heap, 12);
-    // print_array(heap, 12);
+    // printf_array(heap, 12);
     return EXIT_SUCCESS;
 }

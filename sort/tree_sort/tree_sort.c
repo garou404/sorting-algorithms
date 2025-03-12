@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "tree_sort.h"
+#include "../sort.h"
 
 void tree_sort(int size_arr, int* arr) {
     // build tree
@@ -11,6 +12,7 @@ void tree_sort(int size_arr, int* arr) {
     }
     print_tree(bst);
 
+    // sort the array using the binary search tree
     int index = 0;
     build_sorted_array(bst->root, arr, &index);
     printf_array(arr, size_arr);
@@ -54,19 +56,6 @@ struct node* create_node(int val, struct node*parent) {
     return new_node;
 }
 
-void printf_array(int*tab, int size) {
-    printf("[");
-    for (int i = 0; i < size; i++)
-    {
-        if (i == 0) {
-            printf("%d", tab[i]);
-        }else{
-            printf(", %d", tab[i]);
-        }
-    }
-    printf("]\n");
-}
-
 void free_tree(struct binary_search_tree* bst) {
     free_node(bst->root);
     free(bst);
@@ -86,7 +75,7 @@ void print_tree(struct binary_search_tree* map) {
     }
 }
 
-void print_space(int n, int additional_space) {
+void print_space_tree(int n, int additional_space) {
     for (int i = 0; i < 8*n+additional_space; i++) {
         printf(" ");
     }
@@ -107,7 +96,7 @@ void print_node(struct node* node, int length, int additional_space) {
     }
     if(node->children[LEFT]){
         if(node->children[RIGHT]){
-            print_space(length, additional_space);
+            print_space_tree(length, additional_space);
         }
         printf("%d l:", node->val);
         if (node->val > 9){
