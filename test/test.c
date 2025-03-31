@@ -8,7 +8,7 @@
 #include "../sort/merge_sort/merge_sort.h"
 #include "../sort/heap_sort/heap_sort.h"
 #include "../sort/tree_sort/tree_sort.h"
-
+#include "../sort/block_sort/block_sort.h"
 // case empty array
 // array with same values inside
 // huge array
@@ -22,7 +22,6 @@ void test_sorted(int*arr1, int*arr2, int arr_size) {
 }
 
 void test_sort_normal_array(void (*sort)(int, int*)){
-    
     int arr_sorted[5] = {1, 2, 3, 4, 5};
     int arr_unsorted[5] = {3, 2, 5, 1, 4};
     sort(5, arr_unsorted);
@@ -39,6 +38,10 @@ void test_tree_sort_normal_array(){
 
 void test_heap_sort_normal_array(){
     test_sort_normal_array(heap_sort);
+}
+
+void test_block_sort_normal_array(){
+    test_sort_normal_array(block_sort);
 }
 
 void test_sort_huge_array(void (*sort)(int, int*)){
@@ -83,6 +86,8 @@ int main(int argc, char** argv) {
         cmocka_unit_test(test_merge_sort_huge_array),
         cmocka_unit_test(test_heap_sort_normal_array),
         cmocka_unit_test(test_heap_sort_huge_array),
+        cmocka_unit_test(test_block_sort_normal_array),
+        
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
 }
