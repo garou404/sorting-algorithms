@@ -69,7 +69,7 @@ void swap(int* heap, int i1, int i2){
     heap[i2] = temp;
 }
 
-void heap_sort(int*heap, int size){
+void heap_sort(int size, int*heap){
     // phase 1
     build_the_heap(heap, size);
     // phase 2
@@ -104,14 +104,4 @@ void sift_down(int*heap, int size, int index){
             return;
         }
     }
-}
-
-int main(int argc, char** argv) {
-
-    int heap[12] = {5, 9, 2, 4, 10, 12, 6, 3, 1, 14, 7, 8};
-    print_heap(heap, 12);
-    heap_sort(heap, 12);
-    print_heap(heap, 12);
-    // printf_array(heap, 12);
-    return EXIT_SUCCESS;
 }

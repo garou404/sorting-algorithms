@@ -16,7 +16,7 @@ OBJS=$(SRCS:.c=.o)
 
 # Rule to build the executable
 $(TARGET): $(OBJS)
-	$(CC) -o $@ $^
+	$(CC) -o $@ $^ -L./lib -lcmocka
 
 clean:
 	rm -f $(OBJS) $(TARGET)

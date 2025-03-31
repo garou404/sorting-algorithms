@@ -10,12 +10,12 @@ void tree_sort(int size_arr, int* arr) {
     for (int i = 0; i < size_arr; i++) {
         insert_node(bst, *(arr+i));
     }
-    print_tree(bst);
+    // print_tree(bst);
 
     // sort the array using the binary search tree
     int index = 0;
     build_sorted_array(bst->root, arr, &index);
-    printf_array(arr, size_arr);
+    // printf_array(arr, size_arr);
     free_tree(bst);
 }
 
@@ -106,13 +106,4 @@ void print_node(struct node* node, int length, int additional_space) {
         }
         return;
     }
-}
-
-int main(int argc, char** argv) {
-    int test_array[] = {3, 8, 1, 2, 7, 4};
-    int size = 6;
-
-    tree_sort(size, test_array);
-    
-    return EXIT_SUCCESS;
 }
