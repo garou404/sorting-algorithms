@@ -3,7 +3,7 @@ FLAGS=-Wall -Werror
 #  -I../tree_sort/tree_sort.h -I../merge_sort/merge_sort.h -I../heap_sort/heap_sort.h
 TARGET=testSort
 P=../sort/
-SRCS=test.c $(P)tree_sort/tree_sort.c $(P)merge_sort/merge_sort.c $(P)heap_sort/heap_sort.c $(P)block_sort/block_sort.c
+SRCS=test.c $(P)tree_sort/tree_sort.c $(P)merge_sort/merge_sort.c $(P)heap_sort/heap_sort.c $(P)block_sort/block_sort.c $(P)bubble_sort/bubble_sort.c
 OBJS=$(SRCS:.c=.o)
 
 

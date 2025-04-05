@@ -9,6 +9,7 @@
 #include "../sort/heap_sort/heap_sort.h"
 #include "../sort/tree_sort/tree_sort.h"
 #include "../sort/block_sort/block_sort.h"
+#include "../sort/bubble_sort/bubble_sort.h"
 // case empty array
 // array with same values inside
 // huge array
@@ -42,6 +43,10 @@ void test_heap_sort_normal_array(){
 
 void test_block_sort_normal_array(){
     test_sort_normal_array(block_sort);
+}
+
+void test_bubble_sort_normal_array(){
+    test_sort_normal_array(bubble_sort);
 }
 
 void test_sort_huge_array(void (*sort)(int, int*)){
@@ -80,13 +85,19 @@ int main(int argc, char** argv) {
 
 
     const struct CMUnitTest tests[] = {
+        // TREE SORT ------------------------
         cmocka_unit_test(test_tree_sort_normal_array),
         cmocka_unit_test(test_tree_sort_huge_array),
+        // MERGE SORT ------------------------
         cmocka_unit_test(test_merge_sort_normal_array),
         cmocka_unit_test(test_merge_sort_huge_array),
+        // HEAP SORT ------------------------
         cmocka_unit_test(test_heap_sort_normal_array),
         cmocka_unit_test(test_heap_sort_huge_array),
+        // BLOCK SORT ------------------------
         cmocka_unit_test(test_block_sort_normal_array),
+        // BUBBLE SORT ------------------------
+        cmocka_unit_test(test_bubble_sort_normal_array),
         
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
