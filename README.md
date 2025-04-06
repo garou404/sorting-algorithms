@@ -11,3 +11,5 @@ Implemented Algorithms:
 
 * Merge Sort
 * Heap Sort
+* Tree Sort
+* Bubble Sort
