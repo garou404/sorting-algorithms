@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "quick_sort.h"
+#include "%s.h"
 #include "../sort.h"
 
 
-void quick_sort(int size, int*tab){
+void %s(int size, int*tab){
 
 }
