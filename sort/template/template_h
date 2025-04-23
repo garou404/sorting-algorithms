@@ -1,4 +1,4 @@
-#ifndef %s
-#define %s
+#ifndef %s_SORT_H
+#define %s_SORT_H
 
 #endif
