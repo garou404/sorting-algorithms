@@ -32,6 +32,13 @@ void test_sort_normal_array(void (*sort)(int, int*)){
     test_sorted(arr_sorted, arr_unsorted, 5);
 }
 
+void test_non_comparison_sort_normal_array(void (*sort)(int, int*, int)){
+    int arr_sorted[5] = {1, 2, 3, 4, 5};
+    int arr_unsorted[5] = {3, 2, 5, 1, 4};
+    sort(5, arr_unsorted, 5);
+    test_sorted(arr_sorted, arr_unsorted, 5);
+}
+
 void test_merge_sort_normal_array(){
     test_sort_normal_array(merge_sort);
 }
@@ -57,7 +64,7 @@ void test_quick_sort_normal_array(){
 }
 
 void test_count_sort_normal_array(){
-    test_sort_normal_array(count_sort);
+    test_non_comparison_sort_normal_array(count_sort);
 }
 // SORT ARRAY OF 100 ELEMENTS
 
