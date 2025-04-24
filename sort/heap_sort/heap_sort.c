@@ -63,12 +63,6 @@ void build_the_heap(int*heap, int size){
     }
 }
 
-void swap(int* heap, int i1, int i2){
-    int temp = heap[i1];
-    heap[i1] = heap[i2];
-    heap[i2] = temp;
-}
-
 void heap_sort(int size, int*heap){
     // phase 1
     build_the_heap(heap, size);
@@ -96,9 +90,10 @@ void sift_down(int*heap, int size, int index){
         }
         if (heap[index] < heap[nxt_index]){
             //swap element of cur index and nxt_index
-            int temp = heap[index];
-            heap[index] = heap[nxt_index];
-            heap[nxt_index] = temp;
+            swap(heap, index, nxt_index);
+            // int temp = heap[index];
+            // heap[index] = heap[nxt_index];
+            // heap[nxt_index] = temp;
             index = nxt_index;
         }else {
             return;

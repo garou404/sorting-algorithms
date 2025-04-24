@@ -1,6 +1,8 @@
 #ifndef QUICK_SORT_H
 #define QUICK_SORT_H
 
+void quick_sort(int size, int*tab);
 
-int create_file(char* buffer, char extension);
+void quickSort(int *arr, int start, int end);
+int partition(int *arr, int start, int end);
 #endif

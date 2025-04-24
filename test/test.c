@@ -10,11 +10,14 @@
 #include "../sort/tree_sort/tree_sort.h"
 #include "../sort/block_sort/block_sort.h"
 #include "../sort/bubble_sort/bubble_sort.h"
+#include "../sort/quick_sort/quick_sort.h"
+#include "../sort/count_sort/count_sort.h"
 // case empty array
 // array with same values inside
 // huge array
 // few normal arrays
 
+// SORT ARRAY OF 5 ELEMENTS
 
 void test_sorted(int*arr1, int*arr2, int arr_size) {
     for (int i = 0; i < arr_size; i++){
@@ -48,6 +51,15 @@ void test_block_sort_normal_array(){
 void test_bubble_sort_normal_array(){
     test_sort_normal_array(bubble_sort);
 }
+
+void test_quick_sort_normal_array(){
+    test_sort_normal_array(quick_sort);
+}
+
+void test_count_sort_normal_array(){
+    test_sort_normal_array(count_sort);
+}
+// SORT ARRAY OF 100 ELEMENTS
 
 void test_sort_huge_array(void (*sort)(int, int*)){
     int arr_sorted[100] = {
@@ -98,6 +110,10 @@ int main(int argc, char** argv) {
         cmocka_unit_test(test_block_sort_normal_array),
         // BUBBLE SORT ------------------------
         cmocka_unit_test(test_bubble_sort_normal_array),
+        // QUICK SORT ------------------------
+        cmocka_unit_test(test_quick_sort_normal_array),
+        // COUNT SORT ------------------------
+        cmocka_unit_test(test_count_sort_normal_array),
         
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
